@@ -48,6 +48,8 @@ void main( void )
 	int i = 0;
 	int j = 0;
 	int k = 0;
+	Int32 maxCoeff = 0;
+	int maxCoeffInd = 0;
 
 	/* Inicijalizaija razvojne ploce */
 	EZDSP5535_init( );
@@ -58,7 +60,7 @@ void main( void )
 	printf("\n Uklanjanje sinusoidalnog suma iz signala \n");
 
     /* Podesavanje ulazne i izlazne datoteke za simulaciju AD/DA konvertora */
-	aic3204_set_input_filename("../noise1070Hz.pcm");
+	aic3204_set_input_filename("../Female2.pcm");
 	aic3204_set_output_filename("../output1.pcm");
 
     /* Inicijalizacija veze sa AIC3204 kodekom (AD/DA) */
@@ -90,6 +92,21 @@ void main( void )
 			fftSpectrumL[k] = (Int32)inputCopyL[2*k]*inputCopyL[2*k] + (Int32)inputCopyL[2*k+1]*inputCopyL[2*k+1];
 			fftSpectrumR[k] = (Int32)inputCopyR[2*k]*inputCopyR[2*k] + (Int32)inputCopyR[2*k+1]*inputCopyR[2*k+1];
 		}
+
+		maxCoeff = fftSpectrumL[0];
+		maxCoeffInd = 0;
+
+		for (k = 1; k < FFT_SIZE/2; k++)
+		{
+			if (fftSpectrumL[k] > maxCoeff)
+			{
+				printf("Nasao veci! k = %d\n", k);
+				maxCoeff = fftSpectrumL[k];
+				maxCoeffInd = k;
+			}
+		}
+
+		printf("Najveci koeficijent: %ld; index: %d\n", maxCoeff, maxCoeffInd);
 
 		aic3204_write_block(InputBufferL, InputBufferR);
 	}
