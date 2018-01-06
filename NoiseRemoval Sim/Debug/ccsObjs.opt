@@ -1,0 +1,1 @@
+"./aic3204.obj" "./aic3204_init.obj" "./ezdsp5535_aic3204_dma.obj" "./iir.obj" "./main.obj" "./print_number.obj" "./window.obj" "../lnkx.cmd" "../c55xx_csl/lib/55xdspx_r3.lib" "../c55xx_csl/lib/cslVC5505.lib" "../lib/ezdsp5535bsl.lib" -llibc.a -lrts55h.lib -lcslVC5505.lib -lrts55x.lib -lezdsp5535bsl.lib 
