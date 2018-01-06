@@ -19,6 +19,7 @@
 #include "math.h"
 #include "Dsplib.h"
 #include "window.h"
+#include "iir.h"
 
 
 /* Frekvencija odabiranja */
@@ -33,6 +34,12 @@ Int16 InputBufferL[AUDIO_IO_SIZE];
 #pragma DATA_ALIGN(InputBufferR,4)
 Int16 InputBufferR[AUDIO_IO_SIZE];
 
+/* Niz za smestanje odbiraka izlaznog signala */
+#pragma DATA_ALIGN(OutputBufferL,4)
+Int16 OutputBufferL[AUDIO_IO_SIZE];
+#pragma DATA_ALIGN(OutputBufferR,4)
+Int16 OutputBufferR[AUDIO_IO_SIZE];
+
 #pragma DATA_ALIGN(inputCopyL, 4);
 Int16 inputCopyL[FFT_SIZE];
 #pragma DATA_ALIGN(inputCopyR, 4);
@@ -42,6 +49,26 @@ Int16 inputCopyR[FFT_SIZE];
 Int32 fftSpectrumL[FFT_SIZE/2];
 #pragma DATA_ALIGN(fftSpectrumR, 4);
 Int32 fftSpectrumR[FFT_SIZE/2];
+
+#pragma DATA_ALIGN(coefficients1070, 4);
+Int16 coefficients1070[6] = { 30124,  //A0
+							 -20980,  //A1
+							  30124,  //A2
+							  31446,  //B0
+							 -20980,  //B1
+							  32446   //B2
+};
+
+#pragma DATA_ALIGN(inputHistoryL, 4);
+Int16 inputHistoryL[2];
+#pragma DATA_ALIGN(outputHistoryL, 4);
+Int16 outputHistoryL[2];
+
+#pragma DATA_ALIGN(inputHistoryR, 4);
+Int16 inputHistoryR[2];
+#pragma DATA_ALIGN(outputHistoryR, 4);
+Int16 outputHistoryR[2];
+
 
 void main( void )
 {
@@ -60,7 +87,7 @@ void main( void )
 	printf("\n Uklanjanje sinusoidalnog suma iz signala \n");
 
     /* Podesavanje ulazne i izlazne datoteke za simulaciju AD/DA konvertora */
-	aic3204_set_input_filename("../Female2.pcm");
+	aic3204_set_input_filename("../Female2Noise1070.pcm");
 	aic3204_set_output_filename("../output1.pcm");
 
     /* Inicijalizacija veze sa AIC3204 kodekom (AD/DA) */
@@ -78,10 +105,16 @@ void main( void )
 	{
     	aic3204_read_block(InputBufferL, InputBufferR);
 
+    	for (j = 0; j < AUDIO_IO_SIZE; j++)
+    	{
+			inputCopyL[j] = InputBufferL[j];
+			inputCopyR[j] = InputBufferR[j];
+    	}
+
 		for (j = 0; j < AUDIO_IO_SIZE; j++)
 		{
-			inputCopyL[j] = ((Int32)p_window[j] * InputBufferL[j]) >> 15 + 1;
-			inputCopyR[j] = ((Int32)p_window[j] * InputBufferR[j]) >> 15 + 1;
+			inputCopyL[j] = ((Int32)p_window[j] * inputCopyL[j]) >> 15 + 1;
+			inputCopyR[j] = ((Int32)p_window[j] * inputCopyR[j]) >> 15 + 1;
 		}
 
 		rfft(inputCopyL, FFT_SIZE, SCALE);
@@ -100,13 +133,19 @@ void main( void )
 		{
 			if (fftSpectrumL[k] > maxCoeff)
 			{
-				printf("Nasao veci! k = %d\n", k);
+				//printf("Nasao veci! k = %d\n", k);
 				maxCoeff = fftSpectrumL[k];
 				maxCoeffInd = k;
 			}
 		}
 
-		printf("Najveci koeficijent: %ld; index: %d\n", maxCoeff, maxCoeffInd);
+		//printf("Najveci koeficijent: %ld; index: %d\n", maxCoeff, maxCoeffInd);
+
+		for (k = 0; k < AUDIO_IO_SIZE; k++)
+		{
+			OutputBufferL[k] = second_order_IIR(InputBufferL[k], coefficients1070, inputHistoryL, outputHistoryL);
+			OutputBufferR[k] = second_order_IIR(InputBufferR[k], coefficients1070, inputHistoryR, outputHistoryR);
+		}
 
 		aic3204_write_block(InputBufferL, InputBufferR);
 	}

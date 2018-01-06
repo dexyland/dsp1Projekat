@@ -42,6 +42,7 @@ main.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/unaccess.h
 main.obj: D:/temptemp/project/NoiseRemoval\ Sim/c55xx_csl/inc/Dsplib.h
 main.obj: D:/temptemp/project/NoiseRemoval\ Sim/c55xx_csl/inc/tms320.h
 main.obj: ../window.h
+main.obj: ../iir.h
 
 ../main.c: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdio.h: 
@@ -85,3 +86,4 @@ C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/unaccess.h:
 D:/temptemp/project/NoiseRemoval\ Sim/c55xx_csl/inc/Dsplib.h: 
 D:/temptemp/project/NoiseRemoval\ Sim/c55xx_csl/inc/tms320.h: 
 ../window.h: 
+../iir.h: 
