@@ -25,22 +25,22 @@ OBJS += \
 ./sine_table.obj 
 
 C_DEPS += \
-./aic3204.d \
-./aic3204_init.d \
-./ezdsp5535_aic3204_dma.d \
-./gen_sinus.d \
-./main.d \
-./print_number.d \
-./sine_table.d 
+./aic3204.pp \
+./aic3204_init.pp \
+./ezdsp5535_aic3204_dma.pp \
+./gen_sinus.pp \
+./main.pp \
+./print_number.pp \
+./sine_table.pp 
 
 C_DEPS__QUOTED += \
-"aic3204.d" \
-"aic3204_init.d" \
-"ezdsp5535_aic3204_dma.d" \
-"gen_sinus.d" \
-"main.d" \
-"print_number.d" \
-"sine_table.d" 
+"aic3204.pp" \
+"aic3204_init.pp" \
+"ezdsp5535_aic3204_dma.pp" \
+"gen_sinus.pp" \
+"main.pp" \
+"print_number.pp" \
+"sine_table.pp" 
 
 OBJS__QUOTED += \
 "aic3204.obj" \

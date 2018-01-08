@@ -5,7 +5,7 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.C55xx Rev3.0 CPU Functional Simulator_0/TMS320C55x" value="${build_artifact:NoiseRemoval Sim}"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.C55xx Rev3.0 CPU Functional Simulator_0/TMS320C55x" value="NoiseRemoval Sim"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:NoiseRemoval Sim}"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.C55xx Rev3.0 CPU Functional Simulator_0/TMS320C55x" value="D:/temptemp\project\NoiseRemoval Sim\Debug\NoiseRemoval Sim.out"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.C55xx Rev3.0 CPU Functional Simulator_0/TMS320C55x" value="J:/FAKS\3.godina\5.semestar\OAiSDSP 1\projekat2017-18\dsp1Projekat\NoiseRemoval Sim\Debug\NoiseRemoval Sim.out"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/NoiseRemoval Sim"/>
 </listAttribute>

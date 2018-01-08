@@ -51,13 +51,18 @@ Int32 fftSpectrumL[FFT_SIZE/2];
 Int32 fftSpectrumR[FFT_SIZE/2];
 
 #pragma DATA_ALIGN(coefficients1070, 4);
-Int16 coefficients1070[6] = { 30124,  //A0
-							 -20980,  //A1
-							  30124,  //A2
-							  31446,  //B0
-							 -20980,  //B1
-							  32446   //B2
-};
+Int16 coefficients1070[6] = { 28184, -18804, 28184, 0, -17490, 20972 };
+//Int16 coefficients1070[6] = { 29340, -19575, 29340, 0, -19020, 24802 };
+//Int16 coefficients1070[6] = { 30979, -20669, 30979, 0, -20551, 28954 };
+//Int16 coefficients1070[6] = { 32445, -21647, 32445, 0, -21644, 32116 };
+
+#pragma DATA_ALIGN(coefficients720, 4);
+Int16 coefficients720[6] = { 29000, -22984, 29000, 0, -19500, 16900 };
+//Int16 coefficients720[6] = { 29646, -23984, 29646, 0, -21208, 20972 };
+//Int16 coefficients720[6] = { 29958, -24237, 29958, 0, -23064, 24802 };
+//Int16 coefficients720[6] = { 31111, -25169, 31111, 0, -24919, 28954 };
+//Int16 coefficients720[6] = { 32449, -26252, 32449, 0, -26245, 32116 };
+
 
 #pragma DATA_ALIGN(inputHistoryL, 4);
 Int16 inputHistoryL[2];
@@ -143,11 +148,11 @@ void main( void )
 
 		for (k = 0; k < AUDIO_IO_SIZE; k++)
 		{
-			OutputBufferL[k] = second_order_IIR(InputBufferL[k], coefficients1070, inputHistoryL, outputHistoryL);
-			OutputBufferR[k] = second_order_IIR(InputBufferR[k], coefficients1070, inputHistoryR, outputHistoryR);
+			OutputBufferL[k] = 2 * second_order_IIR(InputBufferL[k], coefficients1070, inputHistoryL, outputHistoryL);
+			OutputBufferR[k] = 2 * second_order_IIR(InputBufferR[k], coefficients1070, inputHistoryR, outputHistoryR);
 		}
 
-		aic3204_write_block(InputBufferL, InputBufferR);
+		aic3204_write_block(OutputBufferL, OutputBufferR);
 	}
 
 	/* Prekid veze sa AIC3204 kodekom */

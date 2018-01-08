@@ -4,10 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccsv6/tools/compiler/c5500_4.4.1
-
-GEN_OPTS__FLAG := 
-GEN_CMDS__FLAG := 
+CG_TOOL_ROOT := J:/Program Files (x86)/texasInstruments/ccsv6/tools/compiler/c5500_4.4.1
 
 ORDERED_OBJS += \
 "./aic3204.obj" \
@@ -18,15 +15,15 @@ ORDERED_OBJS += \
 "./print_number.obj" \
 "./window.obj" \
 "../lnkx.cmd" \
+"../lib/ezdsp5535bsl.lib" \
 "../c55xx_csl/lib/55xdspx_r3.lib" \
 "../c55xx_csl/lib/cslVC5505.lib" \
-"../lib/ezdsp5535bsl.lib" \
 $(GEN_CMDS__FLAG) \
--llibc.a \
--lrts55h.lib \
--lcslVC5505.lib \
--lrts55x.lib \
--lezdsp5535bsl.lib \
+-l"libc.a" \
+-l"rts55h.lib" \
+-l"cslVC5505.lib" \
+-l"rts55x.lib" \
+-l"ezdsp5535bsl.lib" \
 
 -include ../makefile.init
 
@@ -36,11 +33,11 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
--include c55xx_csl/lib/subdir_vars.mk
 -include lib/subdir_vars.mk
+-include c55xx_csl/lib/subdir_vars.mk
 -include subdir_rules.mk
--include c55xx_csl/lib/subdir_rules.mk
 -include lib/subdir_rules.mk
+-include c55xx_csl/lib/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -61,9 +58,6 @@ ifneq ($(strip $(ASM_DEPS)),)
 endif
 ifneq ($(strip $(CC_DEPS)),)
 -include $(CC_DEPS)
-endif
-ifneq ($(strip $(SV7A_DEPS)),)
--include $(SV7A_DEPS)
 endif
 ifneq ($(strip $(S55_DEPS)),)
 -include $(S55_DEPS)
@@ -156,20 +150,20 @@ all: NoiseRemoval\ Sim.out
 NoiseRemoval\ Sim.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5515 --memory_model=large -g --define=c5535 --display_error_number --diag_warning=225 --ptrdiff_size=16 -z -m"NoiseRemoval Sim.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"D:/temptemp/project/NoiseRemoval Sim/c55xx_csl/lib" -i"D:/temptemp/project/NoiseRemoval Sim/lib" -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="NoiseRemoval Sim_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "NoiseRemoval Sim.out" $(ORDERED_OBJS)
+	"J:/Program Files (x86)/texasInstruments/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5515 --memory_model=large -g --define=c5535 --display_error_number --diag_warning=225 --ptrdiff_size=16 -z -m"NoiseRemoval Sim.map" --stack_size=0x200 --heap_size=0x400 -i"J:/Program Files (x86)/texasInstruments/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"J:/FAKS/3.godina/5.semestar/OAiSDSP 1/projekat2017-18/dsp1Projekat/NoiseRemoval Sim/c55xx_csl/lib" -i"J:/FAKS/3.godina/5.semestar/OAiSDSP 1/projekat2017-18/dsp1Projekat/NoiseRemoval Sim/lib" -i"J:/Program Files (x86)/texasInstruments/ccsv6/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="NoiseRemoval Sim_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "NoiseRemoval Sim.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 NoiseRemoval\ Sim.hex: $(EXE_OUTPUTS)
 	@echo 'Invoking: C5500 Hex Utility'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/hex55"  -o "NoiseRemoval Sim.hex" $(EXE_OUTPUTS__QUOTED)
+	"J:/Program Files (x86)/texasInstruments/ccsv6/tools/compiler/c5500_4.4.1/bin/hex55"  -o "NoiseRemoval Sim.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "aic3204.d" "aic3204_init.d" "ezdsp5535_aic3204_dma.d" "iir.d" "main.d" "print_number.d" "window.d" 
+	-$(RM) "aic3204.pp" "aic3204_init.pp" "ezdsp5535_aic3204_dma.pp" "iir.pp" "main.pp" "print_number.pp" "window.pp" 
 	-$(RM) "aic3204.obj" "aic3204_init.obj" "ezdsp5535_aic3204_dma.obj" "iir.obj" "main.obj" "print_number.obj" "window.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
