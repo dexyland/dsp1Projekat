@@ -13,7 +13,7 @@
 #define DTMF_PREDAJNIK_SINE_TABLE_H_
 
 /* TODO : Define new SINE TABLE SIZE */
-#define SINE_TABLE_SIZE 1
+#define SINE_TABLE_SIZE 512
 
 extern Int16* p_sine_table;
 
