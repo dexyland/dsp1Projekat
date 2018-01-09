@@ -12,8 +12,7 @@
 #ifndef DTMF_PREDAJNIK_WINDOW_H_
 #define DTMF_PREDAJNIK_WINDOW_H_
 
-/* TODO : Definisati velicinu prozora */
-#define WINDOW_SIZE 1
+#define WINDOW_SIZE 128
 
 extern Int16* p_window;
 
