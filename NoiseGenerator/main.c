@@ -70,7 +70,7 @@ void main( void )
 
 	while(1)
 	{
-		keyPressed = EZDSP5535_SAR_getKey;
+		keyPressed = EZDSP5535_SAR_getKey();
 
 		if (keyPressed == SW1)
 		{
@@ -135,48 +135,48 @@ void printFrequency(int freq)
 {
 	if (freq == 720)
 	{
-		printChar(7);
-		printChar(2);
-		printChar(0);
-		printChar(H);
-		printChar(z);
+		printChar('7');
+		printChar('2');
+		printChar('0');
+		printChar('H');
+		printChar('z');
 	}
 	else if (freq == 1070)
 	{
-		printChar(1);
-		printChar(0);
-		printChar(7);
-		printChar(0);
-		printChar(H);
-		printChar(z);
+		printChar('1');
+		printChar('0');
+		printChar('7');
+		printChar('0');
+		printChar('H');
+		printChar('z');
 	}
 	else if (freq == 1580)
 	{
-		printChar(1);
-		printChar(5);
-		printChar(8);
-		printChar(0);
-		printChar(H);
-		printChar(z);
+		printChar('1');
+		printChar('5');
+		printChar('8');
+		printChar('0');
+		printChar('H');
+		printChar('z');
 	}
 	else if (freq == 2680)
 	{
-		printChar(2);
-		printChar(6);
-		printChar(8);
-		printChar(0);
-		printChar(H);
-		printChar(z);
+		printChar('2');
+		printChar('6');
+		printChar('8');
+		printChar('0');
+		printChar('H');
+		printChar('z');
 	}
 	else
 	{
-		printChar(N);
-		printChar(o);
-		printChar();
-		printChar(N);
-		printChar(o);
-		printChar(i);
-		printChar(s);
-		printChar(e);
+		printChar('N');
+		printChar('o');
+		printChar(' ');
+		printChar('N');
+		printChar('o');
+		printChar('i');
+		printChar('s');
+		printChar('e');
 	}
 }
