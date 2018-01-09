@@ -133,50 +133,41 @@ void main( void )
 
 void printFrequency(int freq)
 {
+	clearLCD();
+
 	if (freq == 720)
 	{
+		printChar('#');
 		printChar('7');
 		printChar('2');
 		printChar('0');
-		printChar('H');
-		printChar('z');
+		printChar('#');
 	}
 	else if (freq == 1070)
 	{
+		printChar('#');
 		printChar('1');
 		printChar('0');
 		printChar('7');
 		printChar('0');
-		printChar('H');
-		printChar('z');
+		printChar('#');
 	}
 	else if (freq == 1580)
 	{
+		printChar('#');
 		printChar('1');
 		printChar('5');
 		printChar('8');
 		printChar('0');
-		printChar('H');
-		printChar('z');
+		printChar('#');
 	}
 	else if (freq == 2680)
 	{
+		printChar('#');
 		printChar('2');
 		printChar('6');
 		printChar('8');
 		printChar('0');
-		printChar('H');
-		printChar('z');
-	}
-	else
-	{
-		printChar('N');
-		printChar('o');
-		printChar(' ');
-		printChar('N');
-		printChar('o');
-		printChar('i');
-		printChar('s');
-		printChar('e');
+		printChar('#');
 	}
 }
