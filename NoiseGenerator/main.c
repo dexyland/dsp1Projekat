@@ -33,6 +33,7 @@ Int16 bufferR[AUDIO_IO_SIZE];
 Int16 noiseBuffer[AUDIO_IO_SIZE];
 
 static void printFrequency(int freq);
+static int frequencyChanged;
 
 
 void main( void )
@@ -67,10 +68,11 @@ void main( void )
     
     /* Postavljanje vrednosti frekvencije odabiranja i pojacanja na kodeku */
     set_sampling_frequency_and_gain(SAMPLE_RATE, 0);
+	printFrequency(720);
 
 	while(1)
 	{
-		keyPressed = EZDSP5535_SAR_getKey();
+		/*keyPressed = EZDSP5535_SAR_getKey();
 
 		if (keyPressed == SW1)
 		{
@@ -80,36 +82,54 @@ void main( void )
 			}
 
 			phase = 0.0;
+			frequencyChanged = 1;
 		}
 		else if (keyPressed == SW2)
 		{
 			printf("Exit key pressed!\n");
 			break;
-		}
-
-		phase = fmod(phase, 2*PI);
+		}*/
 
 		switch (currentFrequency)
 		{
 			case 1:
 				gen_sinus_table(AUDIO_IO_SIZE, 1, 720.0/8000, phase, noiseBuffer);
 			    phase += ph0720;
-			    printFrequency(720);
+
+			    if (frequencyChanged == 1)
+			    {
+			    	printFrequency(720);
+			    	frequencyChanged = 0;
+			    }
 			    break;
 			case 2:
 				gen_sinus_table(AUDIO_IO_SIZE, 1, 1070.0/8000, phase, noiseBuffer);
 			    phase += ph1070;
-			    printFrequency(1070);
+
+			    if (frequencyChanged == 1)
+			    {
+			    	printFrequency(1070);
+			    	frequencyChanged = 0;
+			    }
 			    break;
 			case 3:
 				gen_sinus_table(AUDIO_IO_SIZE, 1, 1580.0/8000, phase, noiseBuffer);
 			    phase += ph1580;
-			    printFrequency(1580);
+
+			    if (frequencyChanged == 1)
+			    {
+			    	printFrequency(1580);
+		    		frequencyChanged = 0;
+		    	}
 			    break;
 			case 4:
 				gen_sinus_table(AUDIO_IO_SIZE, 1, 2680.0/8000, phase, noiseBuffer);
 			    phase += ph2680;
-			    printFrequency(2680);
+			    if (frequencyChanged == 1)
+			    {
+			    	printFrequency(2680);
+		    		frequencyChanged = 0;
+		    	}
 		}
 
 		aic3204_read_block(bufferL, bufferR);
@@ -118,10 +138,12 @@ void main( void )
 	    {
 	    	bufferL[i] = noiseBuffer[i]/2 + bufferL[i]/2;
 	    	bufferR[i] = noiseBuffer[i]/2 + bufferR[i]/2;
+	    	//bufferL[i] = noiseBuffer[i];
+	    	//bufferR[i] = noiseBuffer[i];
 	    }
 
+		phase = fmod(phase, 2*PI);
 		aic3204_write_block(bufferL, bufferR);
-
 	}
     	
 	/* Prekid veze sa AIC3204 kodekom */

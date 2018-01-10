@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccsv6/tools/compiler/c5500_4.4.1
+CG_TOOL_ROOT := J:/Program Files (x86)/texasInstruments/ccsv6/tools/compiler/c5500_4.4.1
 
 ORDERED_OBJS += \
 "./aic3204.obj" \
@@ -150,13 +150,13 @@ all: NoiseRemoval\ Sim.out
 NoiseRemoval\ Sim.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5515 --memory_model=large -g --define=c5535 --display_error_number --diag_warning=225 --ptrdiff_size=16 -z -m"NoiseRemoval Sim.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"C:/git/DSPTEMP/dsp1Projekat/NoiseRemoval Sim/c55xx_csl/lib" -i"C:/git/DSPTEMP/dsp1Projekat/NoiseRemoval Sim/lib" -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="NoiseRemoval Sim_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "NoiseRemoval Sim.out" $(ORDERED_OBJS)
+	"J:/Program Files (x86)/texasInstruments/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5515 --memory_model=large -g --define=c5535 --display_error_number --diag_warning=225 --ptrdiff_size=16 -z -m"NoiseRemoval Sim.map" --stack_size=0x200 --heap_size=0x400 -i"J:/Program Files (x86)/texasInstruments/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"J:/FAKS/3.godina/5.semestar/OAiSDSP 1/projekat2017-18/dsp1Projekat/NoiseRemoval Sim/c55xx_csl/lib" -i"J:/FAKS/3.godina/5.semestar/OAiSDSP 1/projekat2017-18/dsp1Projekat/NoiseRemoval Sim/lib" -i"J:/Program Files (x86)/texasInstruments/ccsv6/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="NoiseRemoval Sim_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "NoiseRemoval Sim.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 NoiseRemoval\ Sim.hex: $(EXE_OUTPUTS)
 	@echo 'Invoking: C5500 Hex Utility'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/hex55"  -o "NoiseRemoval Sim.hex" $(EXE_OUTPUTS__QUOTED)
+	"J:/Program Files (x86)/texasInstruments/ccsv6/tools/compiler/c5500_4.4.1/bin/hex55"  -o "NoiseRemoval Sim.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 
