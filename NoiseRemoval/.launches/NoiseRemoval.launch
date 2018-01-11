@@ -5,6 +5,7 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.Texas Instruments XDS100v2 USB Debug Probe/C55xx" value="${build_artifact:NoiseRemoval}"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.Texas Instruments XDS100v2 USB Debug Probe/C55xx" value="NoiseRemoval"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:NoiseRemoval}"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.Texas Instruments XDS100v2 USB Debug Probe/C55xx" value="J:/FAKS\3.godina\5.semestar\OAiSDSP 1\projekat2017-18\dsp1Projekat\NoiseRemoval\Debug\NoiseRemoval.out"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/NoiseRemoval"/>
 </listAttribute>

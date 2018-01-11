@@ -39,7 +39,7 @@ static int frequencyChanged;
 void main( void )
 {   
 	int i;
-	int currentFrequency = 1;
+	int currentFrequency = 4;
 	Uint16 keyPressed;
 	float ph0720 = 3.26725340;
 	float ph1070 = 0.75397730;

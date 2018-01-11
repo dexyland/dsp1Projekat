@@ -115,12 +115,6 @@ void main( void )
 	{
 		aic3204_read_block(InputBufferL, InputBufferR);
 
-    /*	for (j = 0; j < AUDIO_IO_SIZE; j++)
-    	{
-			inputCopyL[j] = InputBufferL[j];
-			inputCopyR[j] = InputBufferR[j];
-    	}
-*/
 		/* Kopiranje ulaznih odbiraka i prozoriranje */
 		for (j = 0; j < AUDIO_IO_SIZE; j++)
 		{
@@ -151,32 +145,40 @@ void main( void )
 			}
 		}
 
-		if (maxCoeffInd == 0)
+		if (maxCoeffInd >= 22 && maxCoeffInd <= 24)
 		{
+			//printf("Detected 720Hz noise!\n");
+
 			for (k = 0; k < AUDIO_IO_SIZE; k++)
 			{
 				InputBufferL[k] = 2 * second_order_IIR(InputBufferL[k], coefficients720, inputHistoryL, outputHistoryL);
 				InputBufferR[k] = 2 * second_order_IIR(InputBufferR[k], coefficients720, inputHistoryR, outputHistoryR);
 			}
 		}
-		else if (maxCoeffInd == 1)
+		else if (maxCoeffInd == 34)
 		{
+			//printf("Detected 1070Hz noise!\n");
+
 			for (k = 0; k < AUDIO_IO_SIZE; k++)
 			{
 				InputBufferL[k] = 2 * second_order_IIR(InputBufferL[k], coefficients1070, inputHistoryL, outputHistoryL);
 				InputBufferR[k] = 2 * second_order_IIR(InputBufferR[k], coefficients1070, inputHistoryR, outputHistoryR);
 			}
 		}
-		else if (maxCoeffInd == 2)
+		else if (maxCoeffInd >= 50 && maxCoeffInd <= 51)
 		{
+			//printf("Detected 1580Hz noise!\n");
+
 			for (k = 0; k < AUDIO_IO_SIZE; k++)
 			{
 				InputBufferL[k] = 2 * second_order_IIR(InputBufferL[k], coefficients1580, inputHistoryL, outputHistoryL);
 				InputBufferR[k] = 2 * second_order_IIR(InputBufferR[k], coefficients1580, inputHistoryR, outputHistoryR);
 			}
 		}
-		else if (maxCoeffInd == 3)
+		else if (maxCoeffInd == 86)
 		{
+			//printf("Detected 2680Hz noise!\n");
+
 			for (k = 0; k < AUDIO_IO_SIZE; k++)
 			{
 				InputBufferL[k] = 2 * second_order_IIR(InputBufferL[k], coefficients2680, inputHistoryL, outputHistoryL);
@@ -185,7 +187,7 @@ void main( void )
 		}
 		else
 		{
-			printf("No noise!\n");
+			//printf("No noise!\n");
 		}
 
 		aic3204_write_block(InputBufferL, InputBufferR);
